@@ -1,0 +1,23 @@
+.faq-answer {
+
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:max-height .4s ease;
+
+}
+
+
+.faq-item.active .faq-question {
+
+    color:#2563eb;
+
+}
+
+
+.faq-question i {
+
+    transition:.3s;
+
+}

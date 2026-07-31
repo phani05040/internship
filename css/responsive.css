@@ -1,0 +1,484 @@
+/* =====================================================
+                TABLETS
+===================================================== */
+
+@media (max-width: 1024px) {
+
+
+    .container {
+
+        width:92%;
+
+    }
+
+
+
+    .hero-container {
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+    }
+
+
+
+    .hero-image {
+
+        max-width:600px;
+
+        margin:auto;
+
+    }
+
+
+
+    .hero-buttons {
+
+        justify-content:center;
+
+    }
+
+
+
+    .hero-features {
+
+        justify-content:center;
+
+    }
+
+
+
+    .stats-grid {
+
+        grid-template-columns:
+
+        repeat(3,1fr);
+
+    }
+
+
+
+    .features-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .program-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .mentor-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .projects-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .case-study-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .testimonial-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .success-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .technology-grid {
+
+        grid-template-columns:
+
+        repeat(4,1fr);
+
+    }
+
+
+
+    .footer-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+
+
+
+/* =====================================================
+                MOBILE DEVICES
+===================================================== */
+
+
+@media (max-width:768px){
+
+
+
+    body {
+
+        overflow-x:hidden;
+
+    }
+
+
+
+    .header .container {
+
+        height:70px;
+
+    }
+
+
+
+    .logo {
+
+        font-size:22px;
+
+    }
+
+
+
+    .navbar {
+
+        display:none;
+
+    }
+
+
+
+    .nav-buttons {
+
+        display:none;
+
+    }
+
+
+
+    .menu-toggle {
+
+        display:block;
+
+    }
+
+
+
+
+    /* HERO */
+
+
+    .hero {
+
+        padding:60px 0;
+
+    }
+
+
+
+    .hero h1 {
+
+        font-size:34px;
+
+        line-height:1.3;
+
+    }
+
+
+
+    .hero p {
+
+        font-size:16px;
+
+    }
+
+
+
+    .hero-buttons {
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+
+
+    .hero-buttons .btn {
+
+        width:100%;
+
+    }
+
+
+
+
+    /* SECTION */
+
+
+    .section-title {
+
+        margin-bottom:40px;
+
+    }
+
+
+
+    .section-title h2 {
+
+        font-size:28px;
+
+    }
+
+
+
+
+    /* CARDS */
+
+
+    .stats-grid,
+
+    .features-grid,
+
+    .program-grid,
+
+    .mentor-grid,
+
+    .projects-grid,
+
+    .case-study-grid,
+
+    .testimonial-grid,
+
+    .success-grid,
+
+    .footer-grid,
+
+    .contact-wrapper {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .stat-card {
+
+        padding:25px;
+
+    }
+
+
+
+
+    /* PROJECT FILTERS */
+
+
+    .project-filters {
+
+        gap:10px;
+
+    }
+
+
+
+    .filter-btn {
+
+        padding:8px 15px;
+
+        font-size:13px;
+
+    }
+
+
+
+
+    /* TIMELINE */
+
+
+    .timeline-item {
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+
+
+    .timeline-number {
+
+        margin:auto;
+
+    }
+
+
+
+
+    /* CONTACT */
+
+
+    .contact-form {
+
+        padding:25px;
+
+    }
+
+
+
+
+    /* FOOTER */
+
+
+    .footer {
+
+        text-align:center;
+
+    }
+
+
+
+    .social-links {
+
+        justify-content:center;
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+                SMALL PHONES
+===================================================== */
+
+
+@media(max-width:480px){
+
+
+
+    .container {
+
+        width:94%;
+
+    }
+
+
+
+    .hero h1 {
+
+        font-size:28px;
+
+    }
+
+
+
+    .badge {
+
+        font-size:12px;
+
+    }
+
+
+
+    .technology-grid {
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+
+    .tech-card {
+
+        padding:18px 10px;
+
+    }
+
+
+
+    .tech-card i {
+
+        font-size:28px;
+
+    }
+
+
+
+    .case-details {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .project-links {
+
+        flex-direction:column;
+
+    }
+
+
+
+    .contact-item {
+
+        align-items:flex-start;
+
+    }
+
+
+
+}
