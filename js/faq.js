@@ -66,7 +66,7 @@ faqItems.forEach(item => {
 
 
             answer.style.maxHeight =
-            answer.scrollHeight + "px";
+            answer.scrollHeight + "10px";
 
 
 

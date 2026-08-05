@@ -84,8 +84,9 @@ ul {
 .container {
 
     width: 90%;
-    max-width: 1200px;
+    /* max-width: 1200px; */    
     margin: auto;
+    min-block-size: 100px;
 
 }
 
@@ -1409,13 +1410,15 @@ ul {
 
 .testimonial-grid {
 
+    position:relative;
+
     display:grid;
 
-    grid-template-columns:
-
-    repeat(3,1fr);
+    grid-template-columns:1fr;
 
     gap:30px;
+
+    overflow:hidden;
 
 }
 
@@ -1423,13 +1426,22 @@ ul {
 
 .testimonial-card {
 
+    display:none;
+
     background:white;
 
-    padding:30px;
+    padding:30x;
 
     border-radius:var(--radius);
 
     box-shadow:var(--shadow);
+
+}
+
+
+.testimonial-card.active {
+
+    display:block;
 
 }
 
