@@ -161,52 +161,23 @@ function startCounter(){
 
 
     const section =
-    document.querySelector(".stats");
-
-
+    document.querySelector(".stats")
     if(!section) return;
-
-
-
     const sectionTop =
     section.getBoundingClientRect().top;
-
-
-
     if(sectionTop < window.innerHeight - 100 && !started){
-
-
         counters.forEach(counter=>{
-
-
             let target =
             parseInt(counter.innerText);
-
-
             let count = 0;
-
-
             let speed =
             target / 80;
-
-
-
             function update(){
-
-
                 if(count < target){
-
-
                     count += speed;
-
-
                     counter.innerText =
                     Math.ceil(count) + "+";
-
-
                     setTimeout(update,20);
-
-
                 }
 
 

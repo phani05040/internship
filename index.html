@@ -12,150 +12,299 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
     <style>
-   *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#fff;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+
+    /* Important */
+    overflow-x: hidden;
 }
 
-.partners-section{
-    padding:70px 0;
-    border-top:1px solid #ececec;
-    border-bottom:1px solid #ececec;
+
+/* ==============================
+   MAIN SECTION
+============================== */
+
+.partners-section {
+    width: 100%;
+    padding: 70px 0;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+
+    /* Prevent animation from creating horizontal overflow */
+    overflow: hidden;
 }
 
-.partners-container{
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    gap:50px;
+
+/* ==============================
+   CERTIFICATION SLIDER
+============================== */
+
+.certifications-slider {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 80px;
 }
 
-.section-title{
-    min-width:250px;
+.certifications-track {
+    display: flex;
+    width: max-content;
+    gap: 30px;
+
+    animation: certificationScroll 28s linear infinite;
 }
 
-.section-title h2{
-    font-size:38px;
-    line-height:1.3;
-    font-weight:700;
-    color:#111;
+.certifications-slider:hover .certifications-track {
+    animation-play-state: paused;
 }
 
-.section-title span{
-    color:#0d9488;
+
+/* ==============================
+   PARTNER SECTION
+============================== */
+
+.partners-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    min-width: 0;
 }
 
-.divider{
-    width:1px;
-    height:140px;
-    background:#ddd;
+
+/* Title */
+
+.section-title {
+    min-width: 250px;
 }
 
-.logo-strip{
-    flex:1;
-    overflow:hidden;
-    position:relative;
+.section-title h2 {
+    font-size: 38px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #111;
 }
 
-.logo-track{
-    display:flex;
-    width:max-content;
-    animation:scroll 28s linear infinite;
-    gap:30px;
+.section-title span {
+    color: #0d9488;
 }
 
-.logo-strip:hover .logo-track{
-    animation-play-state:paused;
+
+/* Divider */
+
+.divider {
+    width: 1px;
+    min-width: 1px;
+    height: 140px;
+    background: #ddd;
 }
 
-.logo-item{
-    width:140px;
-    min-width:140px;
-    height:140px;
-    background:#fff;
-    border:1px solid #e6e6e6;
-    border-radius:18px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:18px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
-    transition:.3s;
+
+/* ==============================
+   PARTNER LOGO STRIP
+============================== */
+
+.logo-strip {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
 }
 
-.logo-item:hover{
-    transform:translateY(-6px);
-    box-shadow:0 10px 24px rgba(0,0,0,.15);
+.partners-track {
+    display: flex;
+    width: max-content;
+    gap: 30px;
+
+    animation: partnerScroll 28s linear infinite;
 }
 
-.logo-item img{
-    width:80px;
-    height:80px;
-    object-fit:contain;
-    mix-blend-mode:multiply;
+.logo-strip:hover .partners-track {
+    animation-play-state: paused;
 }
 
-.logo-item p{
-    margin-top:12px;
-    font-size:14px;
-    font-weight:600;
-    color:#333;
-    text-align:center;
+
+/* ==============================
+   LOGO CARD
+============================== */
+
+.logo-item {
+    width: 140px;
+    min-width: 140px;
+    height: 140px;
+
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 18px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .08);
+
+    transition: .3s;
 }
 
-@keyframes scroll{
-    from{
-        transform:translateX(0);
+.logo-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .15);
+}
+
+.logo-item img {
+    width: 80px;
+    height: 80px;
+
+    object-fit: contain;
+
+    mix-blend-mode: multiply;
+}
+
+.logo-item p {
+    margin-top: 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #333;
+
+    text-align: center;
+}
+
+
+/* ==============================
+   ANIMATIONS
+============================== */
+
+@keyframes certificationScroll {
+
+    from {
+        transform: translateX(0);
     }
-    to{
-        transform:translateX(-50%);
+
+    to {
+        transform: translateX(-50%);
     }
+
 }
 
-/* Responsive */
+@keyframes partnerScroll {
 
-@media(max-width:768px){
+    from {
+        transform: translateX(0);
+    }
 
-.partners-container{
-    flex-direction:column;
-    gap:25px;
+    to {
+        transform: translateX(-50%);
+    }
+
 }
 
-.divider{
-    display:none;
-}
 
-.section-title{
-    text-align:center;
-}
+/* ==============================
+   MOBILE
+============================== */
 
-.section-title h2{
-    font-size:30px;
-}
+@media (max-width: 768px) {
 
-.logo-item{
-    width:110px;
-    min-width:110px;
-    height:110px;
-}
+    .partners-section {
+        padding: 40px 0;
+    }
 
-.logo-item img{
-    width:60px;
-    height:60px;
-}
 
-.logo-item p{
-    font-size:12px;
-}
+    /* Certification slider */
+
+    .certifications-slider {
+        margin-bottom: 50px;
+    }
+
+    .certifications-track {
+        gap: 15px;
+        animation-duration: 22s;
+    }
+
+
+    /* Main partner section */
+
+    .partners-container {
+        width: 100%;
+        padding: 0 15px;
+
+        flex-direction: column;
+        align-items: center;
+
+        gap: 25px;
+    }
+
+
+    /* Title */
+
+    .section-title {
+        min-width: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .section-title h2 {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+
+
+    /* Hide divider */
+
+    .divider {
+        display: none;
+    }
+
+
+    /* Logo slider */
+
+    .logo-strip {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .partners-track {
+        gap: 15px;
+        animation-duration: 22s;
+    }
+
+
+    /* Logo cards */
+
+    .logo-item {
+        width: 110px;
+        min-width: 110px;
+        height: 110px;
+
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .logo-item img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .logo-item p {
+        margin-top: 6px;
+        font-size: 10px;
+        line-height: 1.2;
+    }
 
 }
  </style>
@@ -270,152 +419,160 @@ body{
 
 
 <section class="partners-section">
-    <div class="logo-track">
 
-    <!-- First Set -->
-    <div class="logo-item">
-        <img src="images/aicte.jpg" alt="AICTE">
-        <p>AICTE Approved</p>
+    <!-- Certifications -->
+    <div class="certifications-slider">
+        <div class="certifications-track">
+
+            <div class="logo-item">
+                <img src="images/aicte.jpg" alt="AICTE">
+                <p>AICTE Approved</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/msme.jpg" alt="MSME">
+                <p>MSME Registered</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/mca.jpg" alt="MCA">
+                <p>Ministry of Corporate Affairs</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/moe.jpg" alt="MOE">
+                <p>Ministry of Education</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/dl.jpg" alt="Digital Learning">
+                <p>Digital Learning</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/isi.jpg" alt="ISO">
+                <p>ISO Certified</p>
+            </div>
+
+            <!-- Duplicate -->
+            <div class="logo-item">
+                <img src="images/aicte.jpg" alt="AICTE">
+                <p>AICTE Approved</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/msme.jpg" alt="MSME">
+                <p>MSME Registered</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/mca.jpg" alt="MCA">
+                <p>Ministry of Corporate Affairs</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/moe.jpg" alt="MOE">
+                <p>Ministry of Education</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/dl.jpg" alt="Digital Learning">
+                <p>Digital Learning</p>
+            </div>
+
+            <div class="logo-item">
+                <img src="images/isi.jpg" alt="ISO">
+                <p>ISO Certified</p>
+            </div>
+
+        </div>
     </div>
 
-    <div class="logo-item">
-        <img src="images/msme.jpg" alt="MSME">
-        <p>MSME Registered</p>
-    </div>
 
-    <div class="logo-item">
-        <img src="images/mca.jpg" alt="MCA">
-        <p>Ministry of Corporate Affairs</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/moe.jpg" alt="MOE">
-        <p>Ministry of Education</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/dl.jpg" alt="Digital Learning">
-        <p>Digital Learning</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/isi.jpg" alt="ISO">
-        <p>ISO Certified</p>
-    </div>
-
-    <!-- Duplicate -->
-    <div class="logo-item">
-        <img src="images/aicte.jpg" alt="AICTE">
-        <p>AICTE Approved</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/msme.jpg" alt="MSME">
-        <p>MSME Registered</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/mca.jpg" alt="MCA">
-        <p>Ministry of Corporate Affairs</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/moe.jpg" alt="MOE">
-        <p>Ministry of Education</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/dl.jpg" alt="Digital Learning">
-        <p>Digital Learning</p>
-    </div>
-
-    <div class="logo-item">
-        <img src="images/isi.jpg" alt="ISO">
-        <p>ISO Certified</p>
-    </div>
-
-</div>
-
-<br>
-<br>
-<br>
+    <!-- Collaborative Network -->
     <div class="partners-container">
 
         <div class="section-title">
-            <h2>Our <span>Collaborative</span><br>Network</h2>
+            <h2>
+                Our <span>Collaborative</span><br>
+                Network
+            </h2>
         </div>
 
         <div class="divider"></div>
 
         <div class="logo-strip">
-            <div class="logo-track">
 
-                <!-- First Set -->
+            <div class="partners-track">
+
                 <div class="logo-item">
-                    <img src="images/abc.jpg" alt="Google">
+                    <img src="images/Google.jpg" alt="Google">
                     <p>Google</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/aicte.jpg" alt="Microsoft">
+                    <img src="images/microsoft.jpg" alt="Microsoft">
                     <p>Microsoft</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/dl.jpg" alt="AWS">
+                    <img src="images/aws.jpg" alt="AWS">
                     <p>AWS</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/msme.jpg" alt="Topmate">
+                    <img src="images/oracle.jpg" alt="Topmate">
                     <p>Topmate</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/mca.jpg" alt="Google">
+                    <img src="images/Google.jpg" alt="Google">
                     <p>Google</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/moe.jpg" alt="Microsoft">
+                    <img src="images/microsoft.jpg" alt="Microsoft">
                     <p>Microsoft</p>
                 </div>
 
                 <!-- Duplicate -->
+
                 <div class="logo-item">
-                    <img src="images/abc.jpg" alt="Google">
+                    <img src="images/Google.jpg" alt="Google">
                     <p>Google</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/aicte.jpg" alt="Microsoft">
+                    <img src="images/microsoft.jpg" alt="Microsoft">
                     <p>Microsoft</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/dl.jpg" alt="AWS">
+                    <img src="images/aws.jpg" alt="AWS">
                     <p>AWS</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/msme.jpg" alt="Topmate">
+                    <img src="images/oracle.jpg" alt="Topmate">
                     <p>Topmate</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/mca.jpg" alt="Google">
+                    <img src="images/Google.jpg" alt="Google">
                     <p>Google</p>
                 </div>
 
                 <div class="logo-item">
-                    <img src="images/moe.jpg" alt="Microsoft">
+                    <img src="images/microsoft.jpg" alt="Microsoft">
                     <p>Microsoft</p>
                 </div>
 
             </div>
+
         </div>
 
     </div>
+
 </section>
     <!-- ================= WHY CHOOSE US ================= -->
     <section class="why-us">
@@ -516,7 +673,7 @@ body{
                         <li><strong>Skills:</strong> Frontend + Backend</li>
                         <li><strong>Tech:</strong> HTML, CSS, JS, React, Node.js</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -532,7 +689,7 @@ body{
                         <li><strong>Skills:</strong> Frontend + Backend</li>
                         <li><strong>Tech:</strong> HTML, CSS, JS, Python</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -548,7 +705,7 @@ body{
                         <li><strong>Skills:</strong> AI Models</li>
                         <li><strong>Tech:</strong> Python, TensorFlow, Scikit</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -564,7 +721,7 @@ body{
                         <li><strong>Skills:</strong> Data Analysis</li>
                         <li><strong>Tech:</strong> Python, Pandas, Weka, Orange</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -580,7 +737,7 @@ body{
                         <li><strong>Skills:</strong> Wireframes & Prototypes</li>
                         <li><strong>Tech:</strong> Figma, Adobe XD</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -596,7 +753,7 @@ body{
                         <li><strong>Skills:</strong> CI/CD & Deployment</li>
                         <li><strong>Tech:</strong> Docker, AWS, Kubernetes</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -612,7 +769,7 @@ body{
                         <li><strong>Skills:</strong> Object-Oriented Programming</li>
                         <li><strong>Tech:</strong> Java, Eclipse, VS Code</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -628,7 +785,7 @@ body{
                         <li><strong>Skills:</strong> Scripting & Automation</li>
                         <li><strong>Tech:</strong> Python, Jupyter Notebook</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div> 
@@ -644,7 +801,7 @@ body{
                         <li><strong>Skills:</strong> Algorithm Design</li>
                         <li><strong>Tech:</strong> Python, Java</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -660,7 +817,7 @@ body{
                         <li><strong>Skills:</strong> Ethical Hacking</li>
                         <li><strong>Tech:</strong> Kali Linux, Wireshark</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://forms.gle/HHjG1mjQfYY1bJYv7" target="_blank" class="btn btn-primary">
                         Apply Now
                     </a>
                 </div>
@@ -1207,11 +1364,11 @@ body{
                             </p>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">
+                            <a href="https://github.com/phani05040/My_Zomato.git" class="btn btn-outline">
                                 <i class="fab fa-github"></i>
                                 GitHub
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="https://github.com/phani05040/My_Zomato.git" class="btn btn-primary">
                                 <i class="fas fa-globe"></i>
                                 Live Demo
                             </a>
@@ -1254,11 +1411,11 @@ body{
                             </p>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">
+                            <a href="https://github.com/phani05040/AI-DCGAN.git" class="btn btn-outline">
                                 <i class="fab fa-github"></i>
                                 GitHub
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="https://github.com/phani05040/AI-DCGAN.git" class="btn btn-primary">
                                 <i class="fas fa-globe"></i>
                                 Live Demo
                             </a>
@@ -1301,11 +1458,11 @@ body{
                             </p>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">
+                            <a href="https://github.com/phani05040/summerPro.git" class="btn btn-outline">
                                 <i class="fab fa-github"></i>
                                 GitHub
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="https://github.com/phani05040/summerPro.git" class="btn btn-primary">
                                 <i class="fas fa-globe"></i>
                                 Live Demo
                             </a>
@@ -1368,14 +1525,14 @@ body{
                             </p>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">
+                            <a href="https://github.com/phani05040/MyVelib_Bike_Sharing_System.git" class="btn btn-outline">
 
                                 <i class="fab fa-github"></i>
 
                                 GitHub
 
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="https://github.com/phani05040/MyVelib_Bike_Sharing_System.git" class="btn btn-primary">
                                 <i class="fas fa-chart-line"></i>
                                 View Dashboard
                             </a>
@@ -1418,11 +1575,11 @@ body{
                             </p>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">
+                            <a href="https://github.com/phani05040/MyVelib_Bike_Sharing_System.git" class="btn btn-outline">
                                 <i class="fab fa-figma"></i>
                                 Figma
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="https://github.com/phani05040/MyVelib_Bike_Sharing_System.git" class="btn btn-primary">
                                 <i class="fas fa-eye"></i>
                                 Prototype
                             </a>
@@ -1471,11 +1628,11 @@ Project 6 continues in Part 2B-1B-2
                             </p>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">
+                            <a href="https://github.com/phani05040/MyVelib_Bike_Sharing_System.git" class="btn btn-outline">
                                 <i class="fab fa-github"></i>
                                 GitHub
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="https://github.com/phani05040/MyVelib_Bike_Sharing_System.git" class="btn btn-primary">
                                 <i class="fas fa-shopping-cart"></i>
                                 Live Store
                             </a>
