@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document Gallery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            background: linear-gradient(135deg, #173b8f, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        .search-container {
+            max-width: 900px;
+            margin: -25px auto 35px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        #searchBox {
+            width: 100%;
+            padding: 17px 22px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            outline: none;
+        }
+
+        #searchBox:focus {
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.25);
+        }
+
+        /* =========================
+           GALLERY
+        ========================== */
+
+        .gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* =========================
+           DOCUMENT CARD
+        ========================== */
+
+        .document-card {
+            background: white;
+            border-radius: 15px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e7ebf2;
+            transition: 0.25s ease;
+        }
+
+        .document-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-number {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .document-info h2 {
+            font-size: 21px;
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .document-info p {
+            color: #64748b;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .view-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .view-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .download-btn {
+            background: #e8eefc;
+            color: #1d4ed8;
+        }
+
+        .download-btn:hover {
+            background: #dbe5fb;
+        }
+
+        /* =========================
+           MODAL
+        ========================== */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 25px;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-header {
+            height: 55px;
+            background: #173b8f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 17px;
+        }
+
+        .close {
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #cbd5e1;
+        }
+
+        #documentFrame {
+            width: 100%;
+            height: calc(100% - 55px);
+            border: none;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .header {
+                padding: 40px 15px;
+            }
+
+            .header h1 {
+                font-size: 30px;
+            }
+
+            .header p {
+                font-size: 15px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                padding: 0 15px 40px;
+            }
+
+            .document-card {
+                padding: 18px;
+                align-items: flex-start;
+            }
+
+            .document-info h2 {
+                font-size: 19px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+                min-width: 75px;
+                padding: 10px 12px;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .document-card {
+                flex-direction: column;
+            }
+
+            .document-info {
+                width: 100%;
+            }
+
+            .buttons {
+                width: 100%;
+                flex-direction: row;
+            }
+
+            .buttons .btn {
+                flex: 1;
+            }
+
+            .search-container {
+                padding: 0 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         MAIN HEADER
+    ========================== -->
+
+    <header class="header">
+        <h1>JSP SOLUTIONS</h1>
+        <p>All The Docunments needed to company collabration</p>
+    </header>
+
+
+    <!-- =========================
+         SEARCH BOX
+    ========================== -->
+
+    <div class="search-container">
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Search documents..."
+            onkeyup="searchDocuments()"
+        >
+    </div>
+
+
+    <!-- =========================
+         DOCUMENT GALLERY
+    ========================== -->
+
+    <main class="gallery" id="documentGallery">
+
+
+        <!-- 01 -->
+        <!-- 01 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 01</div>
+        <h2>About Us</h2>
+        <p>Information about our organization, services and activities.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/About%20Us.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/About%20Us.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 02 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 02</div>
+        <h2>Complete Draft</h2>
+        <p>Complete draft document containing important information.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Complete%20Draft.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Complete%20Draft.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 03 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 03</div>
+        <h2>Fee Structure</h2>
+        <p>Details regarding the applicable fee structure.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Fee%20Structure.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Fee%20Structure.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 04 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 04</div>
+        <h2>Objective Of Collaboration</h2>
+        <p>Objectives and purpose of the proposed collaboration.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Objective%20Of%20Collaboration.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Objective%20Of%20Collaboration.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 05 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 05</div>
+        <h2>Program Structure</h2>
+        <p>Structure and organization of the proposed program.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Program%20Structure.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Program%20Structure.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 06 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 06</div>
+        <h2>Target Students</h2>
+        <p>Information about the students targeted by the program.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Target%20Students.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Target%20Students.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 07 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 07</div>
+        <h2>Benefits Of Colleges</h2>
+        <p>Benefits provided to participating colleges.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Benefits%20Of%20Colleges.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Benefits%20Of%20Colleges.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 08 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 08</div>
+        <h2>Computer and Learning Material Support</h2>
+        <p>Information about computer and learning material support.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Computer%20and%20Learning%20Material%20Support.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Computer%20and%20Learning%20Material%20Support.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 09 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 09</div>
+        <h2>Hybrid Learning Model</h2>
+        <p>Details about the proposed hybrid learning model.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Hybrid%20Learning%20Model.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Hybrid%20Learning%20Model.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 10 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 10</div>
+        <h2>Our Partner Responsibilities</h2>
+        <p>Responsibilities of the participating partners.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Our%20Partner%20Responsibilities.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Our%20Partner%20Responsibilities.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 11 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 11</div>
+        <h2>Project Development</h2>
+        <p>Information regarding project development and activities.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Project%20Development.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Project%20Development.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 12 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 12</div>
+        <h2>Vision and Mission</h2>
+        <p>The vision and mission of the organization and collaboration.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Vision%20and%20Mission.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Vision%20and%20Mission.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 13 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 13</div>
+        <h2>Benefits of Students</h2>
+        <p>Benefits and opportunities available to students.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Benefits%20of%20Students.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Benefits%20of%20Students.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 14 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 14</div>
+        <h2>Domains Offered</h2>
+        <p>Details of the domains and areas offered through the program.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Domains%20Offered.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Domains%20Offered.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 15 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 15</div>
+        <h2>Implementation Plan</h2>
+        <p>Detailed plan for implementing the proposed collaboration.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Implementation%20Plan.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Implementation%20Plan.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 16 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 16</div>
+        <h2>Our Responsibilities</h2>
+        <p>Responsibilities of our organization in the collaboration.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Our%20Responsibilities.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Our%20Responsibilities.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 17 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 17</div>
+        <h2>Records Transperancy</h2>
+        <p>Information regarding records and transparency.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Records%20Transperancy.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Records%20Transperancy.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 18 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 18</div>
+        <h2>Workshops and Hackthons</h2>
+        <p>Information about workshops, hackathons and related activities.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Workshops%20and%20Hackthons.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Workshops%20and%20Hackthons.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 19 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 19</div>
+        <h2>Certifications</h2>
+        <p>Information about certifications and certification opportunities.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Certifications.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Certifications.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 20 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 20</div>
+        <h2>Exclusive Summary</h2>
+        <p>A summary of the important aspects of the collaboration.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Exclusive%20Summary.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Exclusive%20Summary.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 21 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 21</div>
+        <h2>Industry Mentorship</h2>
+        <p>Information about industry mentorship and professional guidance.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Industry%20Mentorship.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Industry%20Mentorship.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 22 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 22</div>
+        <h2>Programe Duration</h2>
+        <p>Information about the duration and timeline of the program.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Programe%20Duration.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Programe%20Duration.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+<!-- 23 -->
+<div class="document-card">
+    <div class="document-info">
+        <div class="document-number">DOCUMENT 23</div>
+        <h2>Student Profile and Portfolio Management</h2>
+        <p>Information about student profiles and portfolio management.</p>
+    </div>
+
+    <div class="buttons">
+        <button class="btn view-btn"
+                onclick="window.open('https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(window.location.origin + '/Docunments/Student%20Profile%20and%20Portfolio%20Management.docx'), '_blank')">
+            View
+        </button>
+
+        <a class="btn download-btn"
+           href="Docunments/Student%20Profile%20and%20Portfolio%20Management.docx"
+           download>
+            Download
+        </a>
+    </div>
+</div>
+
+
+        
+
+    </main>
+
+
+    <!-- =========================
+         DOCUMENT VIEWER MODAL
+    ========================== -->
+
+    <div class="modal" id="documentModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h3 id="modalTitle">
+                    Document Viewer
+                </h3>
+
+                <span class="close" onclick="closeDocument()">
+                    &times;
+                </span>
+
+            </div>
+
+            <iframe
+                id="documentFrame"
+                src="">
+            </iframe>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+        © 2026 Document Gallery. All Rights Reserved.
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =========================
+           OPEN DOCUMENT
+        ========================== */
+
+        function viewDocument(file, title) {
+
+            document.getElementById("documentModal").style.display = "block";
+
+            document.getElementById("documentFrame").src = file;
+
+            document.getElementById("modalTitle").innerText = title;
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+        /* =========================
+           CLOSE DOCUMENT
+        ========================== */
+
+        function closeDocument() {
+
+            document.getElementById("documentModal").style.display = "none";
+
+            document.getElementById("documentFrame").src = "";
+
+            document.body.style.overflow = "auto";
+        }
+
+
+        /* =========================
+           CLOSE WHEN CLICKING OUTSIDE
+        ========================== */
+
+        window.onclick = function(event) {
+
+            const modal = document.getElementById("documentModal");
+
+            if (event.target === modal) {
+                closeDocument();
+            }
+
+        };
+
+
+        /* =========================
+           ESC KEY TO CLOSE
+        ========================== */
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+                closeDocument();
+            }
+
+        });
+
+
+        /* =========================
+           SEARCH DOCUMENTS
+        ========================== */
+
+        function searchDocuments() {
+
+            const search =
+                document.getElementById("searchBox")
+                .value
+                .toLowerCase();
+
+            const cards =
+                document.querySelectorAll(".document-card");
+
+            cards.forEach(function(card) {
+
+                const text =
+                    card.innerText.toLowerCase();
+
+                if (text.includes(search)) {
+
+                    card.style.display = "flex";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
